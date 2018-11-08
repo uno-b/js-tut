@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, dice;
+var scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
@@ -18,23 +18,25 @@ init();
 //var x = document.querySelector("#score-0").textContent;
 
 function btn() {
-    // 1. Random number
-    var dice = Math.floor(Math.random() * 6) + 1;
+    if (gamePlaying) {
+        // 1. Random number
+        var dice = Math.floor(Math.random() * 6) + 1;
 
-    // 2. Display the result
-    var diceDOM = document.querySelector(".dice");
-    diceDOM.style.display = "block";
-    diceDOM.src = "dice-" + dice + ".png";
+        // 2. Display the result
+        var diceDOM = document.querySelector(".dice");
+        diceDOM.style.display = "block";
+        diceDOM.src = "dice-" + dice + ".png";
 
-    // 3. Update the round score if the rolled number was NOT a 1
-    if (dice !== 1) {
-        // Add score
-        roundScore += dice;
-        document.querySelector("#current-" + activePlayer).textContent =
-            roundScore;
-    } else {
-        // Next player
-        nextPlayer();
+        // 3. Update the round score if the rolled number was NOT a 1
+        if (dice !== 1) {
+            // Add score
+            roundScore += dice;
+            document.querySelector("#current-" + activePlayer).textContent =
+                roundScore;
+        } else {
+            // Next player
+            nextPlayer();
+        }
     }
 }
 
@@ -47,13 +49,12 @@ document.querySelector(".btn-roll").addEventListener("click", btn);
 ****************************************************************************/
 
 document.querySelector(".btn-hold").addEventListener("click", function() {
-    // Add CURRENT score to GLOBAL score
+    if (gamePlaying) {
+        // Add CURRENT score to GLOBAL score
     scores[activePlayer] += roundScore;
-
 
     // Update the UI
     document.querySelector("#score-" + activePlayer).textContent = scores[activePlayer];
-
 
     // Check if player won the game
     if (scores[activePlayer] >= 100) {
@@ -61,9 +62,11 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
         document.querySelector(".dice").style.display = "none";
         document.querySelector(".player-" + activePlayer + "-panel").classList.add("winner");
         document.querySelector(".player-" + activePlayer + "-panel").classList.remove("active");
+        gamePlaying = false;
     } else {
         // Next player
         nextPlayer();
+    }
     }
 });
 
@@ -89,6 +92,7 @@ function init() {
     scores = [0, 0];
     activePlayer = 0;
     roundScore = 0;
+    gamePlaying = true;
 
     document.querySelector(".dice").style.display = "none";
 
