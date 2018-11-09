@@ -32,6 +32,45 @@ console.log(fullAges);
 */
 
 
+/***********************************
+*** Functions returning functions
+***********************************/
+
+function interviewQuestion(job) {
+	if (job === "designer") {
+		return function(name) {
+			console.log(name + ", can you please explain what UX is?");
+		}
+	} else if (job === "teacher") {
+		return function(name) {
+			console.log("What subject do you teach, " + name + "?");
+		}
+	} else {
+		return function(name) {
+			console.log("Hello " + name + ", what do you do?");
+		}
+	}
+}
+
+// 1
+var teacherQuestion = interviewQuestion("teacher");
+teacherQuestion("Sabrina");
+
+// 2
+interviewQuestion("designer")("Mark");
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
