@@ -89,6 +89,40 @@ game();
 */
 
 
+/******************************
+*** Closeres
+******************************/
+
+function retirement(retirementAge) {
+	var a = " years left until retirement.";
+	return function() {
+		var age = 2016 - yearOfBirth;
+		console.log((retirementAge - age) + a);
+	}
+}
+
+// 1
+var retirementUS = retirement(66);
+retirementUS(1990);
+
+// 2
+retirement(66)(1990);
+
+/*
+* The inner function keeps the outer function's variables in memory,
+* even after the outer function has returned.This is built-in in 
+* Javascript and the closures happen automatically.
+*/
+
+
+
+
+
+
+
+
+
+
 
 
 
