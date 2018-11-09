@@ -36,9 +36,29 @@ console.log(jane.lastName);
 console.log(mark.lastName);
 // All gives the same name "Smith"
 
+/****************************************************
+*** Second way of creating Objects using Object.create
+****************************************************/
 
+var personProto = {
+	calculateAge: function() {
+		console.log(2016 - this.yearOfBirth);
+	}
+};
 
+// 1
+var bob = Object.create(personProto);
+bob.name = "Bob";
+bob.yearOfBirth = 1991;
+bob.job = "The builder";
 
+// 2
+var jack = Object.create(personProto,
+	{
+		name: { value: "Jack" },
+		yearOfBirth: { value: 2000 },
+		job: { value: "Student" }
+	});
 
 
 
