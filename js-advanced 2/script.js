@@ -60,14 +60,33 @@ teacherQuestion("Sabrina");
 interviewQuestion("designer")("Mark");
 
 
+/**************************************************
+*** Immediately Invoked Function Expression (IIFE)
+**************************************************/
 
+// Bad practice !!!
+function game() {
+	var score = Math.random() * 10;
+	console.log(score >= 5);
+}
+game();
 
+// Good practice - IIFE
+(function() {
+	var score = Math.random() * 10;
+	console.log(score >= 5);
+})();
 
+// IIFE with parameters
+(function(goodLuck) {
+	var score = Math.random() * 10;
+	console.log(score >= (5 - goodLuck));
+})(5);
 
-
-
-
-
+/*
+* Useful for calling anonymous functions and immediately calling 
+* the function
+*/
 
 
 
