@@ -95,7 +95,7 @@ game();
 
 function retirement(retirementAge) {
 	var a = " years left until retirement.";
-	return function() {
+	return function(yearOfBirth) {
 		var age = 2016 - yearOfBirth;
 		console.log((retirementAge - age) + a);
 	}
@@ -115,14 +115,52 @@ retirement(66)(1990);
 */
 
 
+/********************************************
+*** Bind, call and apply methods
+********************************************/
 
+var john = {
+	name: "John",
+	age: 26,
+	job:"teacher",
+	presentation: function(style, timeOfDay) {
+		if (style === "formal") {
+			console.log("Good " + timeOfDay + ". " +
+				"Name: " + this.name + " age: " + this.age +
+				" job: " + this.job + " style: " +
+				style);
+		} else if (style === "casual") {
+			console.log("Sup. Good " + timeOfDay + ". " +
+				"Name: " + this.name + " age: " + this.age +
+				" job: " + this.job + " style: " +
+				style);
+		}
+	}
+};
 
+var emily = {
+	name: "Emily",
+	age: 35,
+	job: "Designer"
+}
 
+john.presentation("formal", "morning");
 
+john.presentation.call(emily, "casual", "evening"); 
+//Borrows method
 
+// john.presentation.apply(emily, ["casual", "evening"]);
+// Won't work, since the function doesn't expect an array.
+// Only difference from call method is that apply method takes an array
 
+var johnCasual = john.presentation.bind(john, "friendly");
+// Returns a variable. Binds a preset argument to a function
+// To use the function, you only have to give arguments to the
+// remaining parameters (in this case, "timeOfDay").
+// Also called carrying.
 
-
+johnFriendly("morning");
+johnFriendly("night");
 
 
 
