@@ -1,25 +1,15 @@
 // From outside, we don't have access to the scope below
 var budgetController = (function() {
-    var x = 23;
+    
+    // Some code
 
-    var add = function(a) {
-        return x + a;
-    }
-
-    return {
-        publicTest: function(b) {
-            return add(b);
-        }
-    }
 })();
-/*
-* Closure was created. Now, publicTest has access
-* to "x" and "add" variables
-*/ 
 
 
 var UIController = (function() {
+    
     // Some code
+    
 })();
 /*
 * Seperation of concerns - having no connection to other nodes
@@ -27,14 +17,33 @@ var UIController = (function() {
 
 
 var controller = (function(budgetCtrl, UICtrl) {
-    var z = budgetController.publicTest(5);
+    
+    var ctrlAddItem = function() {
+        // 1. Get the field input data
 
-    return {
-        anotherPublic: function() {
-            console.log(z);
-        }
+        // 2. Add the item for the budget controller
+
+        // 3. Add the item to the UI
+
+        // 4. Calculate the budget
+
+        // 5. Display the budget on the UI
+        
     }
+    
+    document.querySelector(".add__btn").addEventListener("click", ctrlAddItem);
+
+    document.addEventListener("keypress", function(event) {
+        if (event.keyCode === 13) {
+            ctrlAddItem();
+        }
+    })
+
+
 })(budgetController, UIController);
+
+
+
 
 
 
