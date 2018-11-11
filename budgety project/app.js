@@ -2,9 +2,36 @@
 // From outside, we don't have access to the scope below
 var budgetController = (function() {
     
-    // Some code
+    var Expense = function(id, description, value) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+
+    var Income = function(id, description, value) {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+
+    var data = {
+        allItems: {
+            exp: [],
+            inc: []
+        },
+        totals: {
+            exp: 0,
+            inc: 0
+        }
+    };
 
 })();
+
+var Expense = function(id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+};
 
 // UI Controller
 var UIController = (function() {
@@ -20,8 +47,6 @@ var UIController = (function() {
         getinput: function() {
             return {
                 type: document.querySelector(DOMstrings.inputType).value, 
-                // Will be either inc or exp
-
                 description: document.querySelector(DOMstrings.inputDescription).value,
                 value: document.querySelector(DOMstrings.inputValue).value
             };
@@ -44,15 +69,13 @@ var controller = (function(budgetCtrl, UICtrl) {
 
         document.querySelector(DOM.inputBtn).addEventListener("click", ctrlAddItem);
 
-    document.addEventListener("keypress", function(event) {
-        if (event.keyCode === 13) {
-            ctrlAddItem();
-        }
-    });
+        document.addEventListener("keypress", function(event) {
+            if (event.keyCode === 13) {
+                ctrlAddItem();
+            }
+        });
     };
     
-    
-
     var ctrlAddItem = function() {
         // 1. Get the field input data
         var input = UICtrl.getinput();
