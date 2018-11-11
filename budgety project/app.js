@@ -1,3 +1,4 @@
+// Budget Controller
 // From outside, we don't have access to the scope below
 var budgetController = (function() {
     
@@ -5,7 +6,7 @@ var budgetController = (function() {
 
 })();
 
-
+// UI Controller
 var UIController = (function() {
     
     var DOMstrings = {
@@ -27,10 +28,9 @@ var UIController = (function() {
         },
 
         getDOMStrings: function() {
-            return DOMStrings;
+            return DOMstrings;
         }
     };
-    
 })();
 /*
 * Seperation of concerns - having no connection to other nodes
@@ -39,12 +39,23 @@ var UIController = (function() {
 // Global App Controller
 var controller = (function(budgetCtrl, UICtrl) {
     
-    var DOM = UICtrl.getDOMStrings();
+    var setupEventListeners = function() {
+        var DOM = UICtrl.getDOMStrings();
+
+        document.querySelector(DOM.inputBtn).addEventListener("click", ctrlAddItem);
+
+    document.addEventListener("keypress", function(event) {
+        if (event.keyCode === 13) {
+            ctrlAddItem();
+        }
+    });
+    };
+    
+    
 
     var ctrlAddItem = function() {
         // 1. Get the field input data
         var input = UICtrl.getinput();
-        console.log(input);
 
         // 2. Add the item for the budget controller
 
@@ -55,19 +66,17 @@ var controller = (function(budgetCtrl, UICtrl) {
         // 5. Display the budget on the UI
 
     }
-    
-    document.querySelector(DOMStrings.inputBtn).addEventListener("click", ctrlAddItem);
 
-    document.addEventListener("keypress", function(event) {
-        if (event.keyCode === 13) {
-            ctrlAddItem();
+    return {
+        init: function() {
+            console.log("Application has started.");
+            setupEventListeners();
         }
-    })
-
+    };
 
 })(budgetController, UIController);
 
-
+controller.init();
 
 
 
