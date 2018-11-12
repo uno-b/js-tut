@@ -161,8 +161,9 @@ var controller = (function(budgetCtrl, UICtrl) {
         input = UICtrl.getinput();
 
         if (input.description !== "" && 
-            !isNaN(input.value &&
-            input.value > 0)) {
+        !isNaN(input.value) && 
+        input.value > 0) {
+
             // 2. Add the item for the budget controller
             newItem = budgetCtrl.addItem(
                 input.type, 
