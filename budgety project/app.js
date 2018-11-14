@@ -157,7 +157,7 @@ var UIController = (function() {
 
         dec = numSplit[1];
 
-        return ("exp" ? sign = "-" : sign = "+") 
+        return (type === "exp" ? sign = "-" : sign = "+") 
         + " " + int + "." + dec;
     };
 
@@ -231,7 +231,7 @@ var UIController = (function() {
 
         displayMonth: function() {
             var now, months, month, year;
-            now = new Date();   // no argument = returns today's date
+            now = new Date();
 
             months = ["January", "February", "March", "April",
             "May", "June", "July", "August",
@@ -241,6 +241,13 @@ var UIController = (function() {
             year = now.getFullYear();
             document.querySelector(DOMstrings.dateLabel).textContent
             = months[month] + " " + year;
+        },
+
+        changedType: function() {
+            var fields = document.querySelectorAll(
+                DOMstrings.inputType, + "," +
+                DOMstrings.inputDescription + "," +
+                DOMstrings.inputValue);
         },
 
         getDOMStrings: function() {
@@ -265,6 +272,9 @@ var controller = (function(budgetCtrl, UICtrl) {
 
         document.querySelector(DOM.container).addEventListener("click",
         ctrlDeleteItem);
+
+        document.querySelector(DOM.inputType).addEventListener("change",
+        UICtrl.changedType);
     };
 
     var updateBudget = function() {
@@ -360,13 +370,3 @@ var controller = (function(budgetCtrl, UICtrl) {
 })(budgetController, UIController);
 
 controller.init();
-
-
-
-
-
-
-
-
-
-
