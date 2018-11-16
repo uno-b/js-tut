@@ -11,11 +11,15 @@ boxesArr5.forEach(function(cur) {
 });
 
 
-// ES6
+// ES6 - using Array's "from" method
 const boxesArr6 = Array.from(boxes);
 boxesArr6.forEach(cur => 
 	cur.style.backgroundColor =
 	"dodgerblue");
+
+// Alternative - using 2nd parameter of Array's "from()" method
+const boxesArr66 = Array.from(boxes, cur =>
+	cur.style.backgroundColor = "dodgerblue");
 
 
 // ES5
@@ -28,7 +32,7 @@ for (var i = 0; i < boxesArr5.length; i++) {
 }
 
 
-// ES6
+// ES6 - for of loop
 for (const cur of boxesArr6) {
 	if (cur.className.includes("blue")) {
 		continue;
@@ -49,7 +53,7 @@ console.log(full); // false, false, false, true, false, false
 console.log(full.indexOf(true)); // 3
 
 
-// ES6
+// ES6 - new Array methods "findIndex()" and "find()"
 console.log(ages.findIndex(cur => cur >= 18)); // 3
 console.log(ages.find(cur => cur >= 18)); // 21
 
