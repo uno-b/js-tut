@@ -22,8 +22,30 @@ getWeather(2487956);
 getWeather(44418);
 
 
+/***************************************************
+*** Making AJAX calls with fetch and AsyncAwait
+***************************************************/
 
 
+async function getWeatherAW() {
+	try {
+		const result = await fetch(`https://www.metaweather.com/api/location/${woeid}`);
+	const data = await result.json();
+	const tomorrow = data.consolidated_weather[1];
+	console.log(`Temperatures tomorrow in ${data.title} ` + 
+		`stay between ${tomorrow.min_temp} and ${tomorrow.max_temp}.`);
+	return data;
+	} catch() {
+		alert(error);
+	}
+}	
+getWeatherAW(2487956);
+
+let dataLondon;
+getWeatherAW(44418).then(data => {
+	dataLondon = data;
+	console.log(dataLondon);
+});
 
 
 
