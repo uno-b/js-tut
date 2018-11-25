@@ -1,6 +1,20 @@
-// Global app controller
-import num from "./test";
+//import { add, multiply as mult, ID } from "./views/searchView"
+import * as searchView from "./views/searchView"
 
-const x = 23
-console.log(`I imported ${num} from another module!`);
-console.log(`Var x = ${x}`);
+console.log(`Using imported functions: ${searchView.add(searchView.ID, 2)}`);
+console.log(`And ${searchView.multiply(3, 5)}`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
