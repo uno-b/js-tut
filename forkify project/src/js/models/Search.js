@@ -10,7 +10,7 @@ export default class Search {
         const key = "e97059c34c37f6468c87297527151933";
         try {
             const res = await axios(`https://www.food2fork.com/api/search?key=${key}&q=${this.query}`);
-        this.recipes = res.data.recipes;
+        this.result = res.data.recipes;
         //console.log(this.recipes);
         } catch (error) {
             alert(error);
